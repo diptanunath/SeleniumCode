@@ -15,6 +15,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -102,6 +106,7 @@ public class ExcelLib {
 	}
 
 	
+  	
 	static String readFile(String fileName) throws IOException {
 	    BufferedReader br = new BufferedReader(new FileReader(fileName));
 	    try {
@@ -118,12 +123,46 @@ public class ExcelLib {
 	    } finally {
 	        br.close();
 	    }
+	}
+	  
+	    ArrayList resultSetToArrayList(String sCurrentLine,Statement stmt) throws SQLException{
+			ResultSet resultSet = stmt.executeQuery(sCurrentLine);
+			  ResultSetMetaData md = resultSet .getMetaData();
+			  int columns = md.getColumnCount();
+			  ArrayList list = new ArrayList(50);
+			  while (resultSet .next()){
+			     HashMap row = new HashMap(columns);
+			     for(int i=1; i<=columns; ++i){           
+			      row.put(md.getColumnName(i),resultSet .getObject(i));
+			     }
+			      list.add(row);
+			  }
 
-	  
-	  
+			 return list;
+			
+	}
+	    
+	    Map<String, List<Object>> resultSetToArrayList2(String sCurrentLine,Statement stmt) throws SQLException {
+	    	ResultSet resultSet = stmt.executeQuery(sCurrentLine);
+	    	ResultSetMetaData md = resultSet .getMetaData();
+	        int columns = md.getColumnCount();
+	        Map<String, List<Object>> map = new HashMap<>(columns);
+	        for (int i = 1; i <= columns; ++i) {
+	            map.put(md.getColumnName(i), new ArrayList<>());
+	        }
+	        while (resultSet .next()) {
+	            for (int i = 1; i <= columns; ++i) {
+	                map.get(md.getColumnName(i)).add(resultSet .getObject(i));
+	               //System.out.println( String.valueOf(map.get(md.getColumnName(i))));
+	               System.out.println(resultSet .getObject(i));
+	              
+	            }
+	        }
+
+	        return map;
+	    }
 	
 	    
-	}
 }
 
 

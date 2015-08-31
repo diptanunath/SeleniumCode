@@ -50,8 +50,9 @@ public class SQL {
 			 
 		      
 		      //Step6:Execute and write query in an excel file
-			  elib2.excuteandwritequery(sCurrentLine,stmt,"Sheet2");
-		     
+			  //elib2.excuteandwritequery(sCurrentLine,stmt,"Sheet2");
+			  elib2.resultSetToArrayList2(sCurrentLine, stmt);
+			  
 		   }catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();

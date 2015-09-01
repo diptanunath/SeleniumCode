@@ -6,12 +6,22 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -29,6 +39,7 @@ import org.testng.annotations.Test;
 
 
 public class LeaderBoard {
+	private static final List<WebElement> WebElement = null;
 	WebDriver driver;
 @Test
 public void Chrome(){
@@ -67,8 +78,39 @@ public void sql1() throws ClassNotFoundException, SQLException, IOException, Inv
 			 
 		      
 		      //Step6:Execute and write query in an excel file
-			  elib2.excuteandwritequery(sCurrentLine,stmt,"Sheet2");
-		   }
+			 // elib2.excuteandwritequery(sCurrentLine,stmt,"Sheet2");
+		     
+			    	ResultSet resultSet = stmt.executeQuery(sCurrentLine);
+			    	ResultSetMetaData md = resultSet .getMetaData();
+			        int columns = md.getColumnCount();
+			        //india
+			        Map<String, List<String>> map = new HashMap<>(columns);
+			        for (int i = 1; i <= columns; ++i) {
+			            map.put(md.getColumnName(i), new ArrayList<>());
+			        }
+			        while (resultSet .next()) {
+			            for (int i = 1; i <= columns; ++i) {
+			                map.get(md.getColumnName(i)).add(resultSet.getString(i));
+			              // System.out.println( String.valueOf(map.get(md.getColumnName(i))));
+			               System.out.println(resultSet .getString(i));
+			               
+			              
+			            }
+			        }
+			        System.out.println(map.get("TeamLead"));
+			        for (Entry<String, List<String>> entry : map.entrySet()) {
+			   
+						System.out.println("Key: "+entry.getKey()+" value: "+entry.getValue());
+						
+					}
+
+			 
+			
+			// elib2.resultSetToArrayList2(sCurrentLine, stmt);
+		
+}
+			  
+			  
   @Test
   public void leaderboard() throws InterruptedException, InvalidFormatException, IOException {
 	
@@ -88,6 +130,7 @@ public void sql1() throws ClassNotFoundException, SQLException, IOException, Inv
 		///////////////////////////Click on Date From //////////////////////////
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//span[@class='date-from-leaderboard']//input")).click();
+		driver.findElement(By.xpath("//div[@id='ui-datepicker-div']/div/a[1]/span")).click();
 		driver.findElement(By.xpath("//div[@id='ui-datepicker-div']"));
 	
      
@@ -115,29 +158,29 @@ public void sql1() throws ClassNotFoundException, SQLException, IOException, Inv
 		act1.moveToElement(wb1).click().perform();
 
 		Thread.sleep(2000);
+		
+		/////Get Table Header Data
+		List<WebElement> lst1=driver.findElements(By.xpath("//table[@id='ldtable']/thead/tr/th"));
+		///Get Column Data
 		List<WebElement> lst=driver.findElements(By.xpath("//table[@id='ldtable']/tbody/tr[1]/td"));
-
-		for(WebElement ls:lst){
-			System.out.println(ls.getText());
-			}
-		for(int i=0;i<lst.size();i++){
-		      String j=lst.get(i).getText();
-		   elib.createRow("Sheet1", i); 
-	       elib.setExcelData("Sheet1",i, 1, j);
-			 
-		 	/////////////////Compare data from DB
-	       
-		 	String g= elib.getExcelData("Sheet2", i, 1);
-		 	if(j.equals(g)){
-		 		System.out.println("both are equal");
-		 	}
-		 	else
-		 	{
-		 		System.out.println("not equal");
-		 	}
-		 
-		   
+        Map<String,String> mMap=new HashMap<String,String>();
+		
+		//Preparing hashMap
+		for(int i=0;i<lst1.size();i++)
+		{
+			mMap.put(lst1.get(i).getText(), lst.get(i).getText());
 		}
+		/////Get Value of hasmap by passing key
+		
+		System.out.println(mMap.get("Team Lead"));
+		
+		//Printing out hashmap
+		for (Map.Entry<String, String> entry : mMap.entrySet()) {
+			System.out.println("Key: "+entry.getKey()+" value: "+entry.getValue());
+			
+		}
+		
+
 			
 		/////Export to Excel\\\\\\\
 		
@@ -151,18 +194,7 @@ public void sql1() throws ClassNotFoundException, SQLException, IOException, Inv
 		wlib.LOGOUT(driver);
 		driver.quit();
 			}
-/*
-  public void ClickTagChatAdmin(String TagName) throws InterruptedException{
-	  driver.findElement(By.cssSelector("span.hamburger-helper.ng-isolate-scope > span")).click();
-	  Thread.sleep(2000);
-	  driver.findElement(By.xpath("//a[span[contains(text(),'"+TagName+"')]]")).click();
-	  ////ul[@role='tablist']/li[5]/a
-	
-	
-  }*/
-
-
-			
+		
 	
   }
 

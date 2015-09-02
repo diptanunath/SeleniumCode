@@ -100,7 +100,7 @@ Thread.sleep(2000);
 //wlib1.waitForPageToLoad(driver);
 wlib1.GetTableData("//table[@id='ldtable']/tbody/tr",driver);
 
-////////////////////////LOGOUT/////////////////////
+////////////////////////LOGOUT///////////////////////
  wlib1.LOGOUT(driver);
  driver.quit();
 

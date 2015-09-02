@@ -141,7 +141,7 @@ public class WebDriverCommonUtils {
 	 
 	while(nextPage.isDisplayed()){
 		
-	//	List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
+	List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
 		  
 		/*  for(WebElement rowElement:Rowlist)
 		  		{

@@ -132,16 +132,18 @@ public class WebDriverCommonUtils {
 	  System.out.println("total entries"+c);
 	  int g=1;
 	  int RowIndex=1;
-	  if(c>10){
+	  if(c>10)
+	  {
 		  try{
 	  
 		 WebElement nextPage=driver.findElement(By.xpath("//a[@id='ldtable_next' and @class='paginate_button next']"));
 	  //WebElement nextPageNotAvailable=driver.findElement(By.xpath("//a[@id='ldtable_next' and @class='paginate_button next disabled']"));
-	  
+	 
 	while(nextPage.isDisplayed()){
-		  List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
+		
+	//	List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
 		  
-		  for(WebElement rowElement:Rowlist)
+		/*  for(WebElement rowElement:Rowlist)
 		  		{
 		  	List<WebElement> columnlist=rowElement.findElements(By.xpath("td"));
 		  int ColumnIndex=1;
@@ -158,15 +160,17 @@ public class WebDriverCommonUtils {
 		  			}
 		  g++;
 		  RowIndex=RowIndex+1;
-		  		}
+		  		}*/
 
-		  
+		Thread.sleep(5000);
 	     nextPage.click();
+	     System.out.println("first");
 	 	 Thread.sleep(5000);
 	
 	  } 
 		  }
 		  catch(Exception ei){
+			  ei.printStackTrace();
 			  List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
 			 
 			  for(WebElement rowElement:Rowlist)

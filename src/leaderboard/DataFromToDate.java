@@ -58,9 +58,7 @@ public class DataFromToDate {
 			break;
 			//System.out.println(w.getText());
 		}
-		/*int size=wb2.size();
-		int date=30-size;
-        System.out.println(date);*/
+		
 		/*driver.findElement(By.xpath(rd.getValue("ClickOnCalender")));
 		WebElement wb=driver.findElement(By.xpath("//a[contains(text(),'"+date+"')]"));
 		Actions act=new Actions(driver);
@@ -71,7 +69,16 @@ public class DataFromToDate {
 	else{
 	
 	///////////////////////////Click on Date From //////////////////////////
-	Thread.sleep(2000);
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(rd.getValue("DateFromLeaderboard"))).click();
+		WebElement calender=driver.findElement(By.xpath(rd.getValue("ClickOnCalender")));
+		List<WebElement> wb2=calender.findElements(By.xpath("//a[@class='ui-state-default']"));
+			for(WebElement w:wb2){
+			w.click();
+			break;
+			//System.out.println(w.getText());
+		}
+	/*Thread.sleep(2000);
 
 	driver.findElement(By.xpath(rd.getValue("DateFromLeaderboard"))).click();
 	driver.findElement(By.xpath(rd.getValue("ClickOnCalender")));
@@ -81,7 +88,7 @@ public class DataFromToDate {
 	
 	Actions act=new Actions(driver);
 	act.moveToElement(wb).click().perform();
-	Thread.sleep(2000);
+	Thread.sleep(2000);*/
 	}
 
 ///////////////////////////Click on Date TO //////////////////////////
@@ -94,7 +101,7 @@ WebElement wb2=driver.findElement(By.xpath("//a[contains(text(),'"+cdate+"')]"))
 Actions act2=new Actions(driver);
 act2.moveToElement(wb2).click().perform();*/
 
-
+	
 /////////////////////Grab Table Data/////////////////////////
 Thread.sleep(2000);
 //wlib1.waitForPageToLoad(driver);

@@ -164,8 +164,7 @@ public class WebDriverCommonUtils {
 
 		Thread.sleep(5000);
 	     nextPage.click();
-	     System.out.println("first");
-	 	 Thread.sleep(5000);
+	     Thread.sleep(5000);
 	
 	  } 
 		  }

@@ -46,7 +46,8 @@ public class SQL {
 		      //Step5:read .sql file through readFile method
 		      ExcelLib elib2=new ExcelLib();
 		     
-		      String sCurrentLine=elib2.readFile("D:\\DBtesting\\Agent_data.sql");
+		      //String sCurrentLine=elib2.readFile("D:\\DBtesting\\Agent_data.sql");
+		      String sCurrentLine=elib2.readFile("D:\\saurav.sql");
 			 
 		      
 		      //Step6:Execute and write query in an excel file

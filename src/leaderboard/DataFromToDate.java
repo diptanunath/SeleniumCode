@@ -29,7 +29,6 @@ public class DataFromToDate {
 	ExcelLib elib=new ExcelLib();
 	ReadPropertiesFile rd=new ReadPropertiesFile();
 	
-	
     wlib1.Login(driver);
 	
 	wlib1.waitForPageToLoad(driver);

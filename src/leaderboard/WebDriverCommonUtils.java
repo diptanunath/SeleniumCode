@@ -20,7 +20,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+//1)Single class
+//All keywords methods should have same signature
+//Return type should be boolean
+//child class of custom function
 
+
+//custom function is sinngle and only class
+ //Signature can be anything,except objects all parameters should be string.
 public class WebDriverCommonUtils {
 	
  @Test
@@ -143,7 +150,7 @@ public class WebDriverCommonUtils {
 		
 	List<WebElement> Rowlist=driver.findElements(By.xpath(TableRowXpath));
 		  
-		/*  for(WebElement rowElement:Rowlist)
+		  for(WebElement rowElement:Rowlist)
 		  		{
 		  	List<WebElement> columnlist=rowElement.findElements(By.xpath("td"));
 		  int ColumnIndex=1;
@@ -160,7 +167,7 @@ public class WebDriverCommonUtils {
 		  			}
 		  g++;
 		  RowIndex=RowIndex+1;
-		  		}*/
+		  		}
 
 		Thread.sleep(5000);
 	     nextPage.click();
@@ -221,7 +228,7 @@ public class WebDriverCommonUtils {
 	  public void Login(WebDriver driver) throws InterruptedException{
 		    driver.get("http://app.helpchat.dev/");
 			driver.findElement(By.xpath("//input[@id='userId']")).sendKeys("taken23231@gmail.com");
-			driver.findElement(By.xpath("//input[@id='password']")).sendKeys("buntyyyyy");
+			driver.findElement(By.xpath("//input[@id='password']")).sendKeys("t");
 			driver.findElement(By.xpath("//button[@class='btn btn-primary']")).click();
 		    driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			System.out.println("Login");
